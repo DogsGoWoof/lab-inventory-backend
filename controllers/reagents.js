@@ -31,14 +31,18 @@ router.get('/', async (req, res) =>{
     }
 });
 
-
-
-
+router.get('/:reagentId', async (req, res) => {
+    try { 
+        const reagent = await Reagent.findById(req.params.reagentId).populate('author');
+        res.status(200).json(reagent);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
 
 
 
 router.use(verifyToken);
-
 module.exports = router;
 
 
