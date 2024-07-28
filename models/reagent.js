@@ -28,7 +28,7 @@ const reagentSchema = new mongoose.Schema (
         category: {
             type: String,
             required: true,
-            enum: ['Sequencing', 'PCR', 'Illumina', 'Pacbio',] //review this 
+            enum: ['Organic', 'Inorganic'] //review this 
         },
         expirationDate: {
             type: Date,
