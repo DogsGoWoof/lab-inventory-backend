@@ -41,8 +41,29 @@ router.get('/:reagentId', async (req, res) => {
 });
 
 
-
-router.use(verifyToken);
-module.exports = router;
-
-
+router.put('/:reagentId', async (req, res) => {
+    try {
+        // Find the reagent:
+        const reagent = await Reagent.findById(req.params.reagentId);
+  
+      // Check permissions:
+        if (!reagent.author.equals(req.user._id)) {
+        return res.status(403).send("You're not allowed to do that!");
+      }
+  
+        // Update reagent:
+        const updatedReagent = await Reagent.findByIdAndUpdate(
+            req.params.reagentId,
+        req.body,
+        { new: true }
+      );
+  
+      // Append req.user to the author property:
+        updatedReagent._doc.author = req.user;
+      console.log(updatedReagent)
+      // Issue JSON response:
+        res.status(200).json(updatedReagent);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
