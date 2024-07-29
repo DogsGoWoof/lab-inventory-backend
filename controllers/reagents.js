@@ -102,4 +102,28 @@ router.post('/:reagentId/comments', async (req, res) => {
     }
 })
 
+router.put('/:reagentId/comments/:commentId', async (req, res) => {
+    try {
+        const reagent = await Reagent.findById(req.params.reagentId);
+        const comment = reagent.comments.id(req.params.commentId);
+        comment.text = req.body.text;
+        await reagent.save();
+        res.status(200).json( { message: 'OK' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
+router.delete('/:reagentId/comments/:commentId', async (req, res) => {
+    try {
+        const reagent = await Reagent.findById(req.params.reagentId);
+        reagent.comments.remove({ _id: req.params.commentId });
+        await reagent.save();
+        res.status(200).json({ message: 'Ok'});
+    } catch (err) {
+        res.status(500).json(err);
+
+    }
+})
+
 module.exports = router;
