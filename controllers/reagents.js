@@ -67,3 +67,16 @@ router.put('/:reagentId', async (req, res) => {
       res.status(500).json(error);
     }
   });
+  router.delete('/:reagentId', async (req, res) => {
+    try {
+        const reagent = await Reagent.findById(req.params.reagentId);
+
+        if (!reagent.author.equals(req.user._id)) {
+            return res.status(403).send("You're not allowed to do that!");
+        }
+
+        const deletedReagent = await Reagent.findByIdAndDelete(req.params.reagentId);
+        res.status(200).json(deletedReagent);
+    } catch (error) {
+        res.status(500).json(error);
+    }
