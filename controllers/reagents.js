@@ -10,9 +10,9 @@ const router = express.Router();
 //======PROTECTED ROUTES ========
 router.post('/', async (req, res) => {
     try {
-        // req.body.author = req.user._id;
+        req.body.author = req.user._id;
         const reagent = await Reagent.create(req.body);
-        // reagent._doc.author = req.user;
+        reagent._doc.author = req.user;
         res.status(201).json(reagent);
     } catch (error) {
         console.log(error);
