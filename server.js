@@ -2,18 +2,24 @@ const dotenv = require('dotenv');
 dotenv.config();
 const cors = require('cors');
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const testJWTRouter = require('./controllers/test-jwt');
 const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
-const reagentsRouter = require('./controllers/reagents.js');
+const reagentsRouter = require('./controllers/reagents');
 
-mongoose.connect(process.env.MONGODB_URI);
+const app = express();
 
-mongoose.connection.on('connected', () => {
+// MongoDB connection with error handling
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
-});
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
