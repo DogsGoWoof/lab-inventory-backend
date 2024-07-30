@@ -48,7 +48,12 @@ router.put('/:reagentId', async (req, res) => {
         // Find the reagent:
         const reagent = await Reagent.findById(req.params.reagentId);
 
-        // Check permissions:
+        if (!equipment) {
+            return res.status(404).send("Equipment not found");
+        }
+
+  
+      // Check permissions:
         if (!reagent.author.equals(req.user._id)) {
             return res.status(403).send("You're not allowed to do that!");
         }
