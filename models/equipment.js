@@ -17,7 +17,7 @@ const equipmentSchema = new mongoose.Schema (
         category: {
             type: String,
             required: true,
-            enum: ['ThermoCycler', 'Sequencer', 'Centrifuge', 'Incubator', 'Microscope', 'Cell counters', 'Fume hood', 'Lab Fridges'] 
+            enum: ['ThermoCycler', 'Sequencer', 'Centrifuge', 'Incubator', 'Microscope'] 
         },
         
         brand: {
