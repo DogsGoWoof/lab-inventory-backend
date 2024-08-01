@@ -47,6 +47,7 @@ router.get('/:reagentId', async (req, res) => {
     try {
         // Find the reagent:
         const reagent = await Reagent.findById(req.params.reagentId);
+
   
       // Check permissions:
         if (!reagent.author.equals(req.user._id)) {
