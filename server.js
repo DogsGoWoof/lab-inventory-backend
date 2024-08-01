@@ -8,6 +8,8 @@ const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
 const reagentsRouter = require('./controllers/reagents');
 const equipmentsRouter = require('./controllers/equipments.js');
+const PORT = process.env.PORT ? process.env.PORT: 3000;
+
 const app = express();
 
 const port = process.env.PORT ? process.env.PORT : "3000";
@@ -19,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
+  
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +32,6 @@ app.use('/profiles', profilesRouter);
 app.use('/reagents', reagentsRouter);
 app.use('/equipments', equipmentsRouter);
 
-app.listen(port, () => {
-    console.log(`The express app is ready on port ${port}!`);
+app.listen(PORT, () => {
+    console.log('The express app is ready!');
 });
