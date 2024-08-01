@@ -23,9 +23,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
   const corsOptions = {
     origin: 'https://labstocker.netlify.app', // Specify the allowed origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Enable cookies if needed
-    optionsSuccessStatus: 204
+    credentials: true, // Include this if you're handling cookies or authentication
   };
   
   // Use the CORS middleware
