@@ -16,5 +16,5 @@ The Lab Inventory Backend is a RESTful API built using [insert programming langu
 
 
 ## Contributing
-Contributions are welcome! Please submit a pull request with your changes and a brief description of what you've added.
+Zee and Shazib
 
