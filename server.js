@@ -12,6 +12,8 @@ const equipmentsRouter = require('./controllers/equipments.js');
 
 const app = express();
 
+const port = process.env.PORT ? process.env.PORT : "3000";
+
 // MongoDB connection with error handling
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -32,6 +34,10 @@ app.use('/profiles', profilesRouter);
 app.use('/reagents', reagentsRouter);
 app.use('/equipments', equipmentsRouter);
 
-app.listen(3000, () => {
-    console.log('The express app is ready!');
+// app.listen(3000, () => {
+//     console.log('The express app is ready!');
+// });
+
+app.listen(port, () => {
+    console.log(`The express app is ready on port ${port}!`);
 });
