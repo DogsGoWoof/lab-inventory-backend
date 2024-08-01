@@ -8,7 +8,7 @@ const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
 const reagentsRouter = require('./controllers/reagents');
 const equipmentsRouter = require('./controllers/equipments.js');
-
+const path = require("path");
 
 const app = express();
 
