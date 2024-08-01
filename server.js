@@ -12,7 +12,6 @@ const app = express();
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
-// MongoDB connection with error handling
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
@@ -21,10 +20,11 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     console.error('Error connecting to MongoDB:', error);
   });
 
-// Middleware
-app.use(cors({
-    origin: "https://erlenmeyer.netlify.app/"
-}));
+// app.use(cors({
+//     // origin: "https://erlenmeyer.netlify.app/"
+//     origin: "*"
+// }));
+app.use(cors());
 app.use(express.json());
 
 // Routes go here
@@ -33,10 +33,6 @@ app.use('/users', usersRouter);
 app.use('/profiles', profilesRouter);
 app.use('/reagents', reagentsRouter);
 app.use('/equipments', equipmentsRouter);
-
-// app.listen(3000, () => {
-//     console.log('The express app is ready!');
-// });
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`);
