@@ -8,7 +8,7 @@ const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
 const reagentsRouter = require('./controllers/reagents');
 const equipmentsRouter = require('./controllers/equipments.js');
-
+const PORT = process.env.PORT ? process.env.PORT: 3000;
 
 const app = express();
 
@@ -20,20 +20,10 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
-
-  const corsOptions = {
-    origin: 'https://labstocker.netlify.app', // Specify the allowed origin
-    methods: 'GET,PUT,POST,DELETE',
-    credentials: true, // Include this if you're handling cookies or authentication
-    optionsSuccessStatus: 204 
-  };
   
-  // Use the CORS middleware
-  app.use(cors(corsOptions));
-
 
 // Middleware
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 // Routes go here
@@ -43,6 +33,6 @@ app.use('/profiles', profilesRouter);
 app.use('/reagents', reagentsRouter);
 app.use('/equipments', equipmentsRouter);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('The express app is ready!');
 });
