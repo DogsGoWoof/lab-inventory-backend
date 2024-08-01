@@ -20,14 +20,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     console.error('Error connecting to MongoDB:', error);
   });
 
-// app.use(cors({
-//     // origin: "https://erlenmeyer.netlify.app/"
-//     origin: "*"
-// }));
 app.use(cors());
 app.use(express.json());
 
-// Routes go here
 app.use('/test-jwt', testJWTRouter);
 app.use('/users', usersRouter);
 app.use('/profiles', profilesRouter);
