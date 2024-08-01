@@ -21,8 +21,19 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     console.error('Error connecting to MongoDB:', error);
   });
 
+  const corsOptions = {
+    origin: 'https://labstocker.netlify.app', // Specify the allowed origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Enable cookies if needed
+    optionsSuccessStatus: 204
+  };
+  
+  // Use the CORS middleware
+  app.use(cors(corsOptions));
+
+
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 // Routes go here
